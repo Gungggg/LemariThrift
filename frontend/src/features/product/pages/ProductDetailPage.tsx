@@ -107,7 +107,10 @@ export function ProductDetailPage() {
             items={[
               { label: 'Home', href: '/' },
               { label: 'Shop', href: '/products' },
-              { label: product.category?.name || 'Category', href: `/category/${product.category?.slug}` },
+              { 
+                label: typeof product.category === 'string' ? product.category : product.category?.name || 'Category', 
+                href: `/category/${(typeof product.category === 'string' ? product.category : product.category?.slug || 'all').toLowerCase()}` 
+              },
               { label: product.name }
             ]} 
             className="mb-8"

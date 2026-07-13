@@ -23,11 +23,9 @@ const saveLocalWishlist = (wishlist: IWishlistItem[]) => {
 
 export const wishlistService = {
   getWishlist: async () => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return getLocalWishlist();
+    return { success: true, data: getLocalWishlist() };
   },
   add: async (data: { productId: string | number }) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
     const wishlist = getLocalWishlist();
     
     const existing = wishlist.find(w => String(w.product.id) === String(data.productId));
@@ -53,7 +51,6 @@ export const wishlistService = {
     }
   },
   remove: async (id: string | number) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
     let wishlist = getLocalWishlist();
     // In wishlist, id might refer to wishlist item id OR product id. 
     // To be safe, we remove if either item.id or product.id matches.

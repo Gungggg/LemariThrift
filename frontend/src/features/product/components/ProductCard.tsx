@@ -44,7 +44,7 @@ export function ProductCard({ product, className }: { product: IProduct, classNa
       </button>
 
       {/* Image */}
-      <Link to={`/product/${product.slug}`} className="relative aspect-[3/4] overflow-hidden bg-surface-elevated block">
+      <Link to={`/product/${product.id}`} className="relative aspect-[3/4] overflow-hidden bg-surface-elevated block">
         <img 
           src={product.image || product.images?.[0] || product.imageUrls?.[0] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=2080&auto=format&fit=crop'} 
           alt={product.name}
@@ -58,7 +58,7 @@ export function ProductCard({ product, className }: { product: IProduct, classNa
 
       {/* Info */}
       <div className="p-4 flex flex-col flex-1">
-        <Link to={`/product/${product.slug}`}>
+        <Link to={`/product/${product.id}`}>
           <h3 className="font-bold uppercase tracking-machined text-sm mb-2 line-clamp-1 hover:text-brand-blue-light transition-colors">{product.name}</h3>
         </Link>
         <p className="text-body text-xs mb-4 line-clamp-1">{typeof product.category === 'string' ? product.category : product.category?.name || 'Uncategorized'}</p>

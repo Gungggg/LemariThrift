@@ -27,9 +27,30 @@ api.interceptors.request.use(
 // Response Interceptor: Handle Errors & Refresh Token
 api.interceptors.response.use(
   (response) => {
-    // API_MAPPING.md says API must return { success, message, data, errors }
-    // We return response.data so services get the payload directly
-    return response.data;
+    const rawData = response.data;
+
+    // If already in expected wrapper format
+    if (rawData && typeof rawData === 'object' && 'success' in rawData && 'data' in rawData) {
+      return rawData;
+    }
+
+    // Map login response to expected structure
+    if (rawData && typeof rawData === 'object' && 'access_token' in rawData) {
+      return {
+        success: true,
+        data: {
+          token: (rawData as any).access_token,
+          refreshToken: (rawData as any).refresh_token || (rawData as any).refreshToken || null,
+          user: (rawData as any).user || null
+        }
+      };
+    }
+
+    // Default wrapping
+    return {
+      success: true,
+      data: rawData
+    };
   },
   async (error: AxiosError<any>) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
