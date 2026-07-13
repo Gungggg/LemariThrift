@@ -4,6 +4,7 @@ import { Container } from './Container';
 import { Link, NavLink } from 'react-router-dom';
 import { Search, ShoppingBag, Heart, User, Menu } from 'lucide-react';
 import { Drawer } from '../ui/Drawer';
+import { useCart } from '@/features/cart/hooks/useCart';
 
 const navLinks = [
   { label: 'NEW IN', href: '/products?sort=newest' },
@@ -16,6 +17,9 @@ const navLinks = [
 export const Navbar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
   ({ className, ...props }, ref) => {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+    const { data: cartData } = useCart();
+    const cartItems = cartData?.data || [];
+    const cartCount = cartItems.reduce((acc: number, item: any) => acc + (item.quantity || 1), 0);
 
     return (
       <>
@@ -69,10 +73,11 @@ export const Navbar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLEle
                 </Link>
                 <Link to="/cart" className="p-2 text-ink hover:text-muted transition-colors relative" aria-label="Cart">
                   <ShoppingBag className="w-5 h-5" />
-                  {/* Badge placeholder */}
-                  <span className="absolute top-1 right-1 flex h-3 w-3 items-center justify-center rounded-full bg-brand-red text-[10px] font-bold text-ink">
-                    3
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-brand-red text-[9px] font-bold text-canvas leading-none">
+                      {cartCount}
+                    </span>
+                  )}
                 </Link>
               </div>
             </Container>

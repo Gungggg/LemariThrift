@@ -81,7 +81,7 @@ export function HomePage() {
                   <Link key={category.id} to={`/category/${category.slug}`} className="group flex flex-col items-center">
                     <div className="w-64 h-64 md:w-full md:aspect-square max-w-[320px] overflow-hidden mb-6 border border-hairline">
                       <img 
-                        src={category.image || 'https://images.unsplash.com/photo-1558769132-cb1fac08b495?q=80&w=2070&auto=format&fit=crop'} 
+                        src={category.image || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDKUTpSVrE_nKEXJTN2Ob3xL0YSyFk88GJVj6qS7eZESABMn1vgqXhuYt9EExMjwi5qqaCgm0xb_ib4Amw6G5oOiiq6XquFNKnaq8TYzQEvJnYqtntH2_nQlkrdJ6vSx1n6dtENaUSvFNKwg0bYILYyKEcXhL_91DuozIKYWhziQ3a5R-8hdFMB0yR-qIALlogFHU7xKEM7QhbaDKR_c8cBtCyP7zjw1B5YcGcLcLZ6JgYRK1pKomjWcHFwaw1IqDceVSGD-tT9wc8'} 
                         alt={category.name}
                         className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                       />

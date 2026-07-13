@@ -1,9 +1,7 @@
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, ExternalLink } from 'lucide-react';
 import { Button, Badge, Skeleton } from '@/components/ui';
 import { useOrders } from '@/features/orders/hooks/useOrders';
-import { cn } from '@/lib/utils';
 import { IOrder, IOrderItem } from '@/types';
 
 export function OrdersPage() {
@@ -15,15 +13,15 @@ export function OrdersPage() {
       case 'pending':
         return <Badge variant="sale">Menunggu Pembayaran</Badge>;
       case 'processing':
-        return <Badge variant="primary">Diproses</Badge>;
+        return <Badge variant="warning">Diproses</Badge>;
       case 'shipped':
-        return <Badge variant="primary">Dikirim</Badge>;
+        return <Badge variant="default">Dikirim</Badge>;
       case 'completed':
         return <Badge variant="success">Selesai</Badge>;
       case 'cancelled':
         return <Badge variant="danger">Dibatalkan</Badge>;
       default:
-        return <Badge variant="outline">{status}</Badge>;
+        return <Badge variant="default">{status}</Badge>;
     }
   };
 
@@ -88,7 +86,7 @@ export function OrdersPage() {
                         />
                       </div>
                       <div className="flex flex-col flex-1">
-                        <Link to={`/product/${product.slug}`} className="font-bold text-sm uppercase tracking-machined hover:text-brand-blue-light transition-colors line-clamp-1">
+                        <Link to={`/product/${product.id}`} className="font-bold text-sm uppercase tracking-machined hover:text-brand-blue-light transition-colors line-clamp-1">
                           {product.name || 'Produk'}
                         </Link>
                         <span className="text-xs text-muted">Qty: {item.quantity}</span>

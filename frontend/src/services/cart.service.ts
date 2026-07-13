@@ -1,4 +1,4 @@
-import { ICartItem, IProduct } from '@/types';
+import { ICartItem } from '@/types';
 import { productService } from './product.service';
 
 const CART_KEY = 'lemari_thrift_cart';
@@ -18,12 +18,9 @@ const saveLocalCart = (cart: ICartItem[]) => {
 
 export const cartService = {
   getCart: async () => {
-    // Delay to simulate network
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return getLocalCart();
+    return { success: true, data: getLocalCart() };
   },
   add: async (data: { productId: string | number, quantity: number }) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
     const cart = getLocalCart();
     
     // Check if already in cart
@@ -54,7 +51,6 @@ export const cartService = {
     }
   },
   update: async (id: string | number, data: { quantity: number }) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
     const cart = getLocalCart();
     const item = cart.find(c => String(c.id) === String(id));
     if (item) {
@@ -64,7 +60,6 @@ export const cartService = {
     return { success: true };
   },
   remove: async (id: string | number) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
     let cart = getLocalCart();
     cart = cart.filter(c => String(c.id) !== String(id));
     saveLocalCart(cart);

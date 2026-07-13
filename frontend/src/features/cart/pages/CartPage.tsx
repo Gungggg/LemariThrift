@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Trash2, Minus, Plus, ShoppingBag, ArrowRight } from 'lucide-react';
 import { Container, Section, Breadcrumb } from '@/components/layout';
@@ -63,14 +62,14 @@ export function CartPage() {
                   
                   return (
                     <div key={item.id} className="flex flex-col sm:flex-row gap-6 py-6 border-b border-hairline relative group">
-                      <Link to={`/product/${product.slug}`} className="w-24 sm:w-32 aspect-[3/4] shrink-0 bg-surface-elevated">
+                      <Link to={`/product/${product.id}`} className="w-24 sm:w-32 aspect-[3/4] shrink-0 bg-surface-elevated">
                         <img src={image} alt={product.name} className="w-full h-full object-cover" />
                       </Link>
                       
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-start gap-4">
                           <div>
-                            <Link to={`/product/${product.slug}`}>
+                            <Link to={`/product/${product.id}`}>
                               <h3 className="font-bold uppercase tracking-machined text-sm sm:text-base hover:text-brand-blue-light transition-colors line-clamp-2 mb-1">
                                 {product.name}
                               </h3>
