@@ -30,25 +30,33 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const isIconOnly = size === 'icon';
-    const Comp = asChild ? Slot : "button";
+    const classes = cn(
+      'inline-flex items-center justify-center font-bold tracking-machined transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none uppercase whitespace-nowrap',
+      !isIconOnly && 'rounded-none',
+      variants[variant],
+      sizes[size],
+      className
+    );
+
+    if (asChild) {
+      return (
+        <Slot ref={ref} className={classes} {...props}>
+          {children}
+        </Slot>
+      );
+    }
 
     return (
-      <Comp
+      <button
         ref={ref}
         disabled={disabled || loading}
-        className={cn(
-          'inline-flex items-center justify-center font-bold tracking-machined transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none uppercase whitespace-nowrap',
-          !isIconOnly && 'rounded-none', // Enforce sharp edges per DESIGN.md unless icon button
-          variants[variant],
-          sizes[size],
-          className
-        )}
+        className={classes}
         {...props}
       >
         {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
         {!loading && icon && <span className={cn(children ? 'mr-2' : '')}>{icon}</span>}
         {children}
-      </Comp>
+      </button>
     );
   }
 );
